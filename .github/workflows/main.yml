@@ -1,4 +1,4 @@
-name: Run MLflow Project (Sesuai Materi)
+name: Run Python Training Script (Sesuai Materi)
 
 on:
   push:
@@ -26,14 +26,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install mlflow==2.19.0 pandas scikit-learn
 
-      # 4. Menjalankan MLflow Project
-      - name: Run MLflow Project
+      # 4. JALANKAN SKRIPNYA LANGSUNG
+      - name: Run Python Training Script
         run: |
-          mlflow run MLProject/ --no-conda
+          cd MLProject  # Masuk ke folder MLProject
+          python modelling.py # Jalankan skripnya!
 
-      # 5. Simpan Artefak
+      # 5. Upload Artefak
       - name: Upload model artifacts
         uses: actions/upload-artifact@v4
         with:
           name: model-artifacts
-          path: mlruns/
+          path: MLProject/mlruns/
