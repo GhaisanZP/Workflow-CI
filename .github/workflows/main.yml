@@ -29,7 +29,7 @@ jobs:
       # 4. Menjalankan MLflow Project
       - name: Run MLflow Project
         run: |
-          mlflow run MLProject/
+          mlflow run MLProject/ --no-conda
 
       # 5. Simpan Artefak
       - name: Upload model artifacts
