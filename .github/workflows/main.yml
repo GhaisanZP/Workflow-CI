@@ -1,33 +1,32 @@
 name: Run MLflow Project
 
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 jobs:
-  train-model:
-    runs-on: ubuntu-latest
-    steps:
-      
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    train-model:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-      - name: Set up Python and Conda
-        uses: conda-actions/setup-miniconda@v3
-        with:
-          auto-update-conda: true
-          python-version: 3.12.7
-      
-      - name: Install MLflow
-        run: pip install mlflow==2.19.0
-      
-      - name: Run MLflow Project
-        run: |
-          mlflow run MLProject/
+            - name: Set up Python and Conda
+              uses: conda-actions/setup-miniconda@v3
+              with:
+                auto-update-conda: true
+                python-version: 3.12.7
+            
+            - name: Install MLflow
+              run: pip install mlflow==2.19.0
 
-      - name: Upload model artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: model-artifacts
-          path: mlruns/
+            - name: Run MLflow Project
+              run: |
+                mlflow run MLProject/
+            
+            - name: Upload model artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: model-artifacts
+                path: mlruns/
