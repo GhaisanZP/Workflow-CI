@@ -1,28 +1,27 @@
 name: Run MLflow Project
 
-# Kapan workflow ini berjalan?
 on:
   push:
     branches:
-      - main  # Setiap kali ada push ke branch 'main'
+      - main
 
 jobs:
   train-model:
-    runs-on: ubuntu-latest  # Menjalankan di server Linux virtual
+    runs-on: ubuntu-latest
     steps:
       
-      # 1. Mengunduh kode dari repo GitHub
+      # 1. Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Setup Python & Conda (sesuai 'conda.yaml')
+      # 2. Setup Conda
       - name: Set up Python and Conda
         uses: conda-actions/setup-miniconda@v3
         with:
           auto-update-conda: true
-          python-version: 3.12.7  # Versi Python yang dipakai
+          python-version: 3.12.7
       
-      # 3. Install MLflow (di 'base' env runner-nya)
+      # 3. Install MLflow
       - name: Install MLflow
         run: pip install mlflow==2.19.0
       
@@ -30,16 +29,10 @@ jobs:
       - name: Run MLflow Project
         run: |
           mlflow run MLProject/
-          # Perintah ini akan:
-          # 1. Membaca 'MLProject/MLProject'
-          # 2. Melihat 'conda_env: conda.yaml'
-          # 3. OTOMATIS membuat env Conda baru (namanya 'mlops-workflow-ci')
-          # 4. Menjalankan 'python modelling.py' di dalam env itu
-          # 5. Menyimpan hasil (model, metrik) ke folder 'mlruns'
 
       # 5. Simpan Artefak
       - name: Upload model artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: model-artifacts  # Nama file zip yang akan dihasilkan
-          path: mlruns/         # Upload folder 'mlruns'
+          name: model-artifacts
+          path: mlruns/
