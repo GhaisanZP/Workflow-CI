@@ -10,27 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       
-      # 1. Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Setup Conda
       - name: Set up Python and Conda
         uses: conda-actions/setup-miniconda@v3
         with:
           auto-update-conda: true
           python-version: 3.12.7
       
-      # 3. Install MLflow
       - name: Install MLflow
         run: pip install mlflow==2.19.0
       
-      # 4. Menjalankan MLflow Project
       - name: Run MLflow Project
         run: |
           mlflow run MLProject/
 
-      # 5. Simpan Artefak
       - name: Upload model artifacts
         uses: actions/upload-artifact@v4
         with:
