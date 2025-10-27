@@ -13,7 +13,7 @@ jobs:
       
       # 1. Mengunduh kode dari repo GitHub
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # 2. Setup Python & Conda (sesuai 'conda.yaml')
       - name: Set up Python and Conda
