@@ -17,7 +17,7 @@ jobs:
 
       # 2. Setup Python & Conda (sesuai 'conda.yaml')
       - name: Set up Python and Conda
-        uses: conda-actions/setup-miniconda@v2
+        uses: conda-actions/setup-miniconda@v3
         with:
           auto-update-conda: true
           python-version: 3.12.7  # Versi Python yang dipakai
@@ -39,7 +39,7 @@ jobs:
 
       # 5. Simpan Artefak
       - name: Upload model artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: model-artifacts  # Nama file zip yang akan dihasilkan
           path: mlruns/         # Upload folder 'mlruns'
